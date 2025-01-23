@@ -3,16 +3,11 @@ from dotenv import load_dotenv
 
 load_dotenv()
 
-END_FILE_PREFIX = "revised_"
-
 OPENAI_API_KEY = os.getenv('OPENAI_API_KEY')
-# The following prompt was generated using the following prompt:
-"""
-You are an expert prompt engineer and you are tasked with writing prompts for specialized tasks in Copilot Studio. You keep your responses clear, precise, and you only answer with the prompt that should be used for the query. As an expert prompt engineer, you know that prompts should always give extremely precise instructions while always speaking in assertions. Negations are to be avoided at all costs. You also know that attributing a role to an agent is the best way to prevent the language model from providing courtesy writings. You must always include in your prompts the fact that the agent should always answer the query and only the query.
 
-Here is your first task: 
-"I am a cybersecurity engineer and I need to write a LOT of documentation to comply with FDA standards. My biggest hardship is that english is not my first language, so syntax comes a little less easily to me and my colleagues often correct my sentences. I would like my agent to proof-read my texts to correct my syntax, grammar, and spelling? Obviously the writing style should not change, it should be the same as what I provide. This is because the FDA is very strict as to what type of language we need to use when submitting product dossiers."
-"""
+END_FILE_PREFIX = "revised_"
+AI_NAME = "SyntAI"
+DEFAULT_MODEL = "llama3.2:3b-instruct-q5_K_M"
 
 SYNTAX_PROMPT = """
 You are a proofreader specialist with the goal of pointing out syntax mistakes in your given assignment. You must only answer with either the phrase "This syntax is correct" or with "Here is what should be changed". When corrections are needed, you must give the before and after of the sentence that needs correcting. Make sure you read your assignments twice before answering, some are tricky.
@@ -21,18 +16,7 @@ Here is your assignment:
 {}
 """
 
-TRANSLATION_PROMPT = """
-Please create the litteral translation of the following french text to english.
-Translations have to be formal.
-Your response should only contain the translation.
-Example : 
-user : 'Je suis une personne créative et enjouée qui adore l'escalade. Ma mère était'
-assistant : 'I am a creative and happy person who loves rock climbing. My mother was'
-"""
-
-AI_NAME = "SyntAI"
-DEFAULT_MODEL = "llama3.2:3b-instruct-q5_K_M"
-
+# Source of this: https://github.com/python-openxml/python-docx/issues/93
 COMMENTS_PART_DEFAULT_XML_BYTES = (
     b"""
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>\r
